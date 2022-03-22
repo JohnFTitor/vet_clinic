@@ -9,6 +9,68 @@ SELECT * FROM animals WHERE neutered = true;
 SELECT * FROM animals WHERE name != 'Gabumon';
 SELECT * FROM animals WHERE weight_kg >= 10.4 AND weight_kg <= 17.3;
 
+/* TRANSACTIONS */
+
+/* Setting species to unspecified */
+
+BEGIN;
+
+UPDATE animals
+SET species = 'unspecified';
+
+SELECT name, species FROM animals;
+
+ROLLBACK;
+
+SELECT name, species FROM animals;
+
+/* Setting species properly */
+
+BEGIN;
+
+UPDATE animals
+SET species = 'digimon'
+WHERE name LIKE '%mon%';
+
+UPDATE animals
+SET species = 'pokemon'
+WHERE species IS NULL;
+
+COMMIT;
+
+SELECT name, species FROM animals;
+/* DELETE ALL RECORDS */
+
+BEGIN;
+
+DELETE FROM animals;
+SELECT * FROM animals;
+
+ROLLBACK;
+
+SELECT * FROM animals;
+/*  Do multiple actions in one transaction */
+
+BEGIN;
+
+DELETE FROM animals
+WHERE date_of_birth > '2022-01-01'; 
+
+SAVEPOINT DELETE_AFTER_DATE_1;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1;
+
+ROLLBACK TO DELETE_AFTER_DATE_1;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1
+WHERE weight_kg < 0;
+
+COMMIT;
+
+SELECT name, weight_kg FROM animals;
+
 /* Logical Queries */
 
 SELECT COUNT(*) as quantity_of_animals FROM animals;
