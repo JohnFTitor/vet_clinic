@@ -78,3 +78,53 @@ GROUP BY species;
 SELECT species, AVG(escape_Attempts) as avergage_escape_attempts FROM animals
 WHERE EXTRACT(YEAR FROM date_of_birth) BETWEEN 1990 AND 2000
 GROUP BY species; */
+
+/*  Queries using JOIN */ 
+
+SELECT full_name as Owner_name, name as Animal_name
+FROM owners O
+JOIN animals A ON O.id = A.owner_id
+WHERE O.full_name = 'Melody Pond';
+
+SELECT A.name, S.name as type
+FROM species S
+JOIN animals A ON S.id = A.species_id
+WHERE S.name = 'Pokemon';
+
+SELECT full_name as Owner_name, name as Animal_name
+FROM owners O
+LEFT JOIN animals A ON O.id = A.owner_id;
+
+SELECT S.name as type, COUNT(A.id)
+FROM species S
+JOIN animals A ON S.id = A.species_id
+GROUP BY S.name;
+
+SELECT O.full_name as Owner_name, A.name as Animal_name
+FROM owners O
+JOIN animals A ON O.id = A.owner_id
+JOIN species S ON S.id = A.species_id
+WHERE S.name = 'Digimon' AND O.full_name = 'Jennifer Orwell'; 
+
+SELECT O.full_name as Owner_name, name as Animal_name
+FROM owners O
+JOIN animals A ON O.id = A.owner_id
+WHERE A.escape_Attempts = 0 AND O.full_name = 'Dean Winchester';
+
+SELECT filtered.Owner_name
+FROM (
+  SELECT O.full_name as Owner_name, COUNT(A.id) as animals_owned 
+  FROM owners O
+  JOIN animals A ON O.id = A.owner_id
+  GROUP BY O.full_name
+) AS filtered
+WHERE filtered.animals_owned = 
+  (
+    SELECT MAX (filtered.animals_owned)
+    FROM (
+      SELECT O.full_name as Owner_name, COUNT(A.id) as animals_owned 
+      FROM owners O
+      JOIN animals A ON O.id = A.owner_id
+      GROUP BY O.full_name
+    ) AS filtered
+);
