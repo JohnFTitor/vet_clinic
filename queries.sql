@@ -13,6 +13,7 @@ SELECT * FROM animals WHERE weight_kg >= 10.4 AND weight_kg <= 17.3;
 
 /* Setting species to unspecified */
 
+/* PREVIOUS EXERCISE
 BEGIN;
 
 UPDATE animals
@@ -22,23 +23,8 @@ SELECT name, species FROM animals;
 
 ROLLBACK;
 
-SELECT name, species FROM animals;
+SELECT name, species FROM animals; */
 
-/* Setting species properly */
-
-BEGIN;
-
-UPDATE animals
-SET species = 'digimon'
-WHERE name LIKE '%mon%';
-
-UPDATE animals
-SET species = 'pokemon'
-WHERE species IS NULL;
-
-COMMIT;
-
-SELECT name, species FROM animals;
 /* DELETE ALL RECORDS */
 
 BEGIN;
@@ -85,9 +71,10 @@ SELECT AVG(weight_kg) as average_weight FROM animals;
 SELECT neutered, SUM(escape_attempts) as escape_Attempts FROM animals
 GROUP BY neutered;
 
+/* PREVIOUS EXERCISE
 SELECT species, MIN(weight_kg) as min_weight, MAX(weight_kg) as max_weight FROM animals
 GROUP BY species;
 
 SELECT species, AVG(escape_Attempts) as avergage_escape_attempts FROM animals
 WHERE EXTRACT(YEAR FROM date_of_birth) BETWEEN 1990 AND 2000
-GROUP BY species;
+GROUP BY species; */
