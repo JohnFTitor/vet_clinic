@@ -111,20 +111,16 @@ FROM owners O
 JOIN animals A ON O.id = A.owner_id
 WHERE A.escape_Attempts = 0 AND O.full_name = 'Dean Winchester';
 
-SELECT filtered.Owner_name
-FROM (
+CREATE VIEW filtered AS
   SELECT O.full_name as Owner_name, COUNT(A.id) as animals_owned 
   FROM owners O
   JOIN animals A ON O.id = A.owner_id
-  GROUP BY O.full_name
-) AS filtered
-WHERE filtered.animals_owned = 
+  GROUP BY O.full_name;
+
+SELECT Owner_name
+FROM filtered
+WHERE animals_owned = 
   (
-    SELECT MAX (filtered.animals_owned)
-    FROM (
-      SELECT O.full_name as Owner_name, COUNT(A.id) as animals_owned 
-      FROM owners O
-      JOIN animals A ON O.id = A.owner_id
-      GROUP BY O.full_name
-    ) AS filtered
+    SELECT MAX (animals_owned)
+    FROM filtered
 );
