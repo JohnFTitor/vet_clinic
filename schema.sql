@@ -47,7 +47,8 @@ CREATE TABLE SPECIALIZATION (
             REFERENCES species(id),
     CONSTRAINT vets_key
         FOREIGN KEY (vets_id)
-            REFERENCES vets(id)        
+            REFERENCES vets(id)
+                ON DELETE CASCADE        
 );
 
 CREATE TABLE VISITS (
