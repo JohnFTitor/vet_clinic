@@ -83,3 +83,42 @@ WHERE name IN ('Angemon','Boarmon');
 SAVEPOINT OW5;
 
 COMMIT;
+
+/* New Data Set */
+
+INSERT INTO vets (name, age, date_of_graduation)
+VALUES
+  ('William Tatcher', 45, '23-apr-2000'),
+  ('Maisy Smith', 26, '17-jan-2019'),
+  ('Stephanie Mendez', 64, '4-may-1981'),
+  ('Jack Harkness', 38, '8-jun-2008');
+
+INSERT INTO specialization (species_id, vets_id)
+VALUES
+  (1, 1),
+  (1, 3),
+  (2, 3),
+  (2, 4);
+
+INSERT INTO visits (animal_id, vets_id, date_of_visit)
+VALUES
+  (1, 1, '24-may-2020'),
+  (1, 3, '22-jul-2020'),
+  (2, 4, '2-feb-2021'),
+  (3, 2, '5-jan-2020'),
+  (3, 2, '8-mar-2020'),
+  (3, 2, '14-may-2020'),
+  (4, 3, '4-may-2021'),
+  (5, 4, '24-feb-2021'),
+  (6, 2, '21-dec-2019'),
+  (6, 1, '10-aug-2020'),
+  (6, 2, '7-apr-2021'),
+  (7, 3, '29-sep-2019'),
+  (8, 4, '3-oct-2020'),
+  (8, 4, '4-nov-2020'),
+  (9, 2, '24-jan-2019'),
+  (9, 2, '15-may-2019'),
+  (9, 2, '27-feb-2020'),
+  (9, 2, '3-aug-2020'),
+  (10, 3, '24-may-2020'),
+  (10, 1, '11-jan-2021');

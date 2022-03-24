@@ -30,3 +30,35 @@ CREATE TABLE ANIMALS (
         FOREIGN KEY (owner_id)
             REFERENCES owners(id)             
 );
+
+CREATE TABLE VETS (
+    id INT GENERATED ALWAYS AS IDENTITY NOT NULL,
+    name VARCHAR,
+    age INT,
+    date_of_graduation DATE,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE SPECIALIZATION (
+    species_id INT,
+    vets_id INT,
+    CONSTRAINT species_key
+        FOREIGN KEY (species_id)
+            REFERENCES species(id),
+    CONSTRAINT vets_key
+        FOREIGN KEY (vets_id)
+            REFERENCES vets(id)
+                ON DELETE CASCADE        
+);
+
+CREATE TABLE VISITS (
+    animal_id INT,
+    vets_id INT,
+    date_of_visit DATE,
+    CONSTRAINT animals_key
+        FOREIGN KEY (animal_id)
+            REFERENCES animals(id),
+    CONSTRAINT vets_key
+        FOREIGN KEY (vets_id)
+            REFERENCES vets(id)        
+);
