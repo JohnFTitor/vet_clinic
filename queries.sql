@@ -210,3 +210,5 @@ WHERE Ve.name = 'Maisy Smith'
 GROUP BY S.name
 ORDER BY visits DESC
 LIMIT 1;
+
+/* COUNT (DISTINCT)*/

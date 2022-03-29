@@ -2,6 +2,10 @@
 
 > This repository is meant to get started with PostgreSQL.
 
+## Scheme Diagram
+
+Click [this link](https://dbdiagram.io/d/62434882bed61838731f29db) to see the scheme diagram for this project. Hover over the lines or the row to get info on the relations with other tables
+
 ## Getting Started 
 
 To get a local copy up and running follow these simple example steps.
